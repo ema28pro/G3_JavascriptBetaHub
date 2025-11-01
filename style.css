@@ -283,3 +283,160 @@ section {
     width: 100%;
     grid-column: 1 / -1;
 }
+
+
+
+
+
+
+/*  ============================
+    🛒 ESTILOS DEL CARRITO
+    ============================ */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header, nav.main-nav {
+    background-color: #000000;
+    color: #000000;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav.main-nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav.main-nav a:hover {
+    color: #ffca28;
+}
+
+/* ====== Contenedor general del carrito ====== */
+.container {
+    max-width: 900px;
+    margin: 3rem auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* ====== Título ====== */
+.container h1 {
+    text-align: center;
+    color: #222;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* ====== Área del carrito ====== */
+#cartArea {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ====== Cada producto en el carrito ====== */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: scale(1.02);
+}
+
+/* Imagen del producto */
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+/* Nombre y cantidad */
+.cart-item .details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cart-item .details h3 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.cart-item .details span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Botones de cantidad */
+.cart-item .quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-item button {
+    border: none;
+    background-color: #ffca28;
+    color: #222;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cart-item button:hover {
+    background-color: #ffd95e;
+}
+
+/* ====== Pie del carrito ====== */
+#cartFooter {
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 2px solid #eee;
+    padding-top: 1rem;
+}
+
+#cartFooter h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+#clearCart {
+    background-color: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#clearCart:hover {
+    background-color: #ff5252;
+}
+
+
