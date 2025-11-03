@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Carrito — Mi Tienda</title>
-    <link rel="stylesheet" href="cart.css" />
+    <link rel="stylesheet" href="styles_cart.css" />
 
     <!-- Scripts: primero el guardia de sesión, luego la lógica del carrito -->
-    
-    <script defer src="./js/cart.js"></script>
+
 </head>
+
 <body>
     <!-- Copia aquí tu navbar si lo tienes en index.html para que visualmente coincida -->
     <nav class="main-nav">
-    <a href="./index.html">Inicio</a>
-    <a href="./cart.html">Carrito 🛒</a>
+        <a href="./index.html">Inicio</a>
+        <a href="./cart.html">Carrito 🛒</a>
     </nav>
 
     <main class="container">
-    <h1>🛒 Tu Carrito</h1>
+        <h1>🛒 Tu Carrito</h1>
 
-    <section id="cartArea">
-        <div id="cartContainer"></div>
+        <section id="cartArea">
+            <div id="cartContainer"></div>
 
-        <div id="cartFooter">
-        <h2>Total: <span id="total">$0</span></h2>
-        <button id="clearCart">Vaciar carrito</button>
-        </div>
-    </section>
+            <div id="cartFooter">
+                <h2>Total: <span id="total">$0</span></h2>
+                <button id="clearCart">Vaciar carrito</button>
+            </div>
+        </section>
     </main>
 
+    <script defer src="./js/cart.js"></script>
 </body>
+
 </html>

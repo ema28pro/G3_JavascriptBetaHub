@@ -27,5 +27,5 @@ Este ejercicio permite al usuario construir una página web dinámica usando pro
 
 Ubicación: `SPRINT2/Ejercicio1`  
 Rama: `ejercicios`
-Archivos: `index.html`, `script.js`, `style.css`
+Archivos: `index.html`, `script.js`, `styles.css`
 
