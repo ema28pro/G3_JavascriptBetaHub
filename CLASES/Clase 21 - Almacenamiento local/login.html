@@ -10,5 +10,19 @@
     <a href="./logged.html">LOGGED</a>
     <input type="text">
     <button>Iniciar sesión</button>
+    <script>
+        const button = document.querySelector('button');
+        const input = document.querySelector('input');
+        
+        button.addEventListener('click', () => {
+            const pasword = input.value;
+            if (pasword == "123"){
+                localStorage.setItem('autenticado', 'true');
+                window.location.href = './logged.html';
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        });
+    </script>
 </body>
 </html>

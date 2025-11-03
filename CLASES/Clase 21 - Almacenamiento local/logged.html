@@ -9,5 +9,13 @@
     <h1>Autenticado</h1>
     <a href="./login.html">LOGIN</a>
     <button>Salir</button>
+    <script>
+        const button = document.querySelector('button');
+        
+        button.addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = './login.html';
+        });
+    </script>
 </body>
 </html>
