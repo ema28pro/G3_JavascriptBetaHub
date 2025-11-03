@@ -8,7 +8,7 @@ form.addEventListener("submit", (event) => {
 
     if (emailUser.value === auth.emailUser && passwordUser.value === auth.passwordUser) {
         localStorage.setItem("email", emailUser.value);
-        window.location.href = "index.html";
+        window.location.href = "./index.html";
     } else {
         // Limpiar los campos del formulario
         emailUser.value = "";
@@ -16,3 +16,7 @@ form.addEventListener("submit", (event) => {
         alert("Credenciales incorrectas. Por favor, intenta de nuevo.")
     }
 });
+
+if (localStorage.getItem("email")) {
+    window.location.href = "./index.html";
+}
