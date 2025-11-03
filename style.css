@@ -7,11 +7,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* --- Header mejorado --- */
 header {
-    text-align: center;
     background: linear-gradient(135deg, #909cab, #378cf4);
     color: rgb(20, 19, 85);
-    padding: 40px;
+    padding: 20px 40px;
     margin-bottom: 0px;
     box-shadow: 0 4px 12px rgba(6, 8, 15, 0.149);
     display: flex;
@@ -20,17 +20,128 @@ header {
     gap: 20px;
 }
 
+.header-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- Navegación --- */
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    gap: 20px;
 }
 
+nav ul li a {
+    color: rgb(20, 19, 85);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* --- Carrito --- */
+.cart-container {
+    position: relative;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.cart-container:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.cart-icon {
+    color: rgb(20, 19, 85);
+    width: 28px;
+    height: 28px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* --- Autenticación --- */
+.auth-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 25px;
+}
+
+.auth-user span {
+    color: rgb(20, 19, 85);
+    font-weight: 500;
+}
+
+.logout-btn,
+.login-btn {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover,
+.login-btn:hover {
+    background-color: #ff3742;
+    transform: translateY(-2px);
+}
+
+.login-btn {
+    background-color: #004aad;
+}
+
+.login-btn:hover {
+    background-color: #0072ff;
+}
+
+/* --- Título --- */
 h1 {
     margin: 0;
     font-size: 2.2rem;
     font-weight: 400;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 /* --- Contenedor de búsqueda --- */
@@ -38,7 +149,6 @@ h1 {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 10px;
 }
 
 #buscador {

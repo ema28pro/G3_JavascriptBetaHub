@@ -10,15 +10,27 @@
 
 <body>
     <header>
-        <nav>
-            <ul></ul>
-        </nav>
+        <div class="header-top">
+            <nav>
+                <ul></ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-container">
+                    <svg class="cart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 15.3C4.3 15.7 4.6 16.5 5.1 16.5H17M17 13V16.5M9 19.5A1.5 1.5 0 1 0 9 22.5A1.5 1.5 0 0 0 9 19.5ZM20 19.5A1.5 1.5 0 1 0 20 22.5A1.5 1.5 0 0 0 20 19.5Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </div>
+                <div id="auth"></div>
+            </div>
+        </div>
         <h1 id="catalog-title">Catálogo de Productos</h1>
         <div class="search-container">
             <input type="text" id="buscador" placeholder="Buscar productos...">
-            
         </div>
-        <div id="auth"></div>
     </header>
     <section>
         <ul id="category"></ul>

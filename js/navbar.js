@@ -1,22 +1,32 @@
 const authSection = document.querySelector("#auth");
 
-authSection.innerHTML = `
-  <div>
-    ${
-      localStorage.getItem("email")
-        ? `Hola Sr/a ${localStorage.getItem("email")}`
-        : `<a href="./login.html">Iniciar sesión</a>`
-    }
-  </div>
-`;
+// Función Cerrar Sesion
+function logout() {
+  localStorage.removeItem("email");
+  window.location.reload();
+}
 
-const titulos = ["Index"];
+function renderAuth() {
+  const userEmail = localStorage.getItem("email");
+
+  authSection.innerHTML = userEmail
+    ? `<div class="auth-user">
+         <span>Hola, ${userEmail}</span>
+         <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+       </div>`
+    : `<a href="./login.html" class="login-btn">Iniciar Sesión</a>`;
+}
+
+// Llamar la función al cargar
+renderAuth();
+
+// Lista de páginas (puedes agregar más aquí)
+const titulos = ["Inicio"];
 let menu = [];
 
 for (let titulo of titulos) {
-  menu.push(
-    `<li><a href="./${titulo.toLowerCase().replaceAll(" ", "_")}.html">${titulo}</a></li>`
-  );
+  const href = titulo === "Inicio" ? "./index.html" : `./${titulo.toLowerCase().replaceAll(" ", "_")}.html`;
+  menu.push(`<li><a href="${href}">${titulo}</a></li>`);
 }
 
 const header = document.querySelector("header nav ul");
