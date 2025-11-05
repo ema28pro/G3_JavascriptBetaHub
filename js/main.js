@@ -60,7 +60,6 @@ function mostrarCards(productos) {
             <p>${producto.short_description}</p>
             <span>Precio: ${producto.price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
             <br>
-            <button onclick="addToCar('${producto.name}')">Carrito</button>
             <a href="detalles.html?prod=${producto.id}">Ver más</a>
         </div>`
     );
@@ -107,21 +106,3 @@ function quitarBoton() {
 
 buscador.addEventListener("input", realizarBusqueda); // Es ineficiente para muchos datos
 // buscador.addEventListener("input", mostrarBoton)
-
-function addToCar(productName) {
-    Swal.fire({
-        title: '¡Alerta!',
-        text: `¿Estas seguro que quieres añadir el producto ${productName}?`,
-        // icon: 'success',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No',
-        showCancelButton: true,
-        showCloseButtton: true
-    }).then(result => {
-        if (result.isConfirmed) {
-            Toastify({
-                text: `${productName} Agregado`
-            }).showToast()
-        };
-    });
-};
