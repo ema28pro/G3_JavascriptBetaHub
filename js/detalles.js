@@ -35,16 +35,15 @@ if (producto) {
                             <input type="number" id="cantidad" value="1" min="1">
                             <button onclick="incrementarCantidad()">+</button>
                         </div>
-                        <button onclick="addToCar('${producto.name}', document.getElementById('cantidad').value)" class="btn-comprar">Comprar</button>
+                        <button onclick="addItemToCar('${producto.name}', document.getElementById('cantidad').value)" class="btn-comprar">Comprar</button>
                     </div>
                 ` : '<a href="login.html">Inicia sesión para comprar</a>'}
             </div>
         </div>
-        
     </div>`;
 }
 
-function addToCar(productName, cantidad) {
+function addItemToCar(productName, cantidad) {
     Swal.fire({
         title: '¡Alerta!',
         text: `¿Estas seguro que quieres añadir ${cantidad} ${productName} al carrito?`,
@@ -65,9 +64,14 @@ function addToCar(productName, cantidad) {
 function incrementarCantidad() {
     const cantidadElement = document.getElementById('cantidad');
     let cantidad = parseInt(cantidadElement.value);
-    cantidad++;
-    cantidadElement.value = cantidad;
-
+    if (cantidad < producto.stack) {
+        cantidad++;
+        cantidadElement.value = cantidad;
+    } else {
+        Toastify({
+            text: `No hay más stock disponible`,
+        }).showToast()
+    }
 }
 
 function decrementarCantidad() {
