@@ -32,10 +32,10 @@ if (producto) {
                     <div class="compra-section">
                         <div class="contador-container">
                             <button onclick="decrementarCantidad()">-</button>
-                            <input type="number" id="cantidad" value="1" min="1">
+                            <input type="number" id="cantidad" value="0">
                             <button onclick="incrementarCantidad()">+</button>
                         </div>
-                        <button onclick="addItemToCar('${producto.name}', document.getElementById('cantidad').value)" class="btn-comprar">Comprar</button>
+                        <button onclick="addItemToCar(${producto.id}, document.getElementById('cantidad').value)" class="btn-comprar">Comprar</button>
                     </div>
                 ` : '<a href="login.html">Inicia sesión para comprar</a>'}
             </div>
@@ -43,30 +43,83 @@ if (producto) {
     </div>`;
 }
 
-function addItemToCar(productName, cantidad) {
+function addItemToCar(productId, cantidad) {
+    // Buscar el producto usando el ID
+    const product = data.find(p => p.id === productId);
+
+    if (!product) {
+        Toastify({
+            text: "Producto no encontrado",
+        }).showToast();
+        return;
+    }
+
+    if (parseInt(cantidad) < 1 || cantidad > product.stack) {
+        Toastify({
+            text: `No hay stock suficiente.`,
+        }).showToast();
+        return;
+    }
+
     Swal.fire({
         title: '¡Alerta!',
-        text: `¿Estas seguro que quieres añadir ${cantidad} ${productName} al carrito?`,
+        text: `¿Estas seguro que quieres añadir ${cantidad} ${product.name} al carrito?`,
         // icon: 'success',
         confirmButtonText: 'Si',
         cancelButtonText: 'No',
         showCancelButton: true,
-        showCloseButtton: true
     }).then(result => {
         if (result.isConfirmed) {
             Toastify({
-                text: `${productName} Agregado al carrito`,
+                text: `${product.name} Agregado al carrito`,
             }).showToast()
-        };
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const index = cart.findIndex(item => item.id === product.id);
+
+            if (index !== -1) {
+                // El producto ya está en el carrito, actualizar la cantidad
+                cart[index].quantity += parseInt(cantidad);
+            } else {
+                // El producto no está en el carrito, agregarlo
+                cart.push({
+                    ...product,
+                    quantity: parseInt(cantidad)
+                });
+            }
+
+            // Guardar el carrito actualizado en localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Actualizamos el total de unidades
+            const cantidadTotal = cart.reduce((acc, item) => acc + item.quantity, 0);
+            localStorage.setItem("quantity", cantidadTotal);
+            
+            // Actualizamos el stock del producto
+            product.stack -= parseInt(cantidad);
+
+            // Actualizar el contador del carrito en la navbar
+            if (typeof updateCartCounter === 'function') {
+                updateCartCounter();
+            };
+
+            // Resetear la cantidad del input a 0
+            document.getElementById('cantidad').value = 0;
+
+        } else {
+            Toastify({
+                text: `Operación cancelada`,
+            }).showToast()
+        }
     });
 };
 
+
+const cantidad = document.getElementById('cantidad');
+
 function incrementarCantidad() {
-    const cantidadElement = document.getElementById('cantidad');
-    let cantidad = parseInt(cantidadElement.value);
-    if (cantidad < producto.stack) {
-        cantidad++;
-        cantidadElement.value = cantidad;
+    if (cantidad.value < producto.stack) {
+        cantidad.value++;
     } else {
         Toastify({
             text: `No hay más stock disponible`,
@@ -75,10 +128,7 @@ function incrementarCantidad() {
 }
 
 function decrementarCantidad() {
-    const cantidadElement = document.getElementById('cantidad');
-    let cantidad = parseInt(cantidadElement.value);
-    if (cantidad > 1) {
-        cantidad--;
-        cantidadElement.value = cantidad;
+    if (cantidad.value > 0) {
+        cantidad.value--;
     }
 }

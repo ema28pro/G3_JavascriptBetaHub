@@ -1,5 +1,14 @@
 const authSection = document.querySelector("#auth");
 
+// Función para actualizar el contador del carrito
+function updateCartCounter() {
+    const cartCount = document.querySelector(".cart-count");
+    if (cartCount) {
+        const quantity = localStorage.getItem("quantity") || 0;
+        cartCount.textContent = quantity;
+    }
+}
+
 // Función Cerrar Sesion
 function logout() {
     localStorage.removeItem("email");
@@ -20,6 +29,7 @@ function renderAuth() {
 
 // Llamar la función al cargar
 renderAuth();
+updateCartCounter();
 
 // Lista de páginas (puedes agregar más aquí)
 const titulos = ["Inicio"];
