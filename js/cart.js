@@ -38,7 +38,7 @@ function renderCart() {
     const price = Number(item.price ?? 0);
     const qty = Number(item.qty ?? 1);
     const stock = Number(item.stock ?? 999);
-    const image = item.image ?? 'https://placehold.co/100x100';
+    const image = item.url ?? item.image ?? 'https://placehold.co/100x100';
 
     const card = document.createElement('article');
     card.className = 'cart-item';
