@@ -12,7 +12,20 @@ listaCategoria.innerHTML = categoriasBtn.join("");
 let categoriaSeleccionada = "Todos";
 let terminoBusqueda = "";
 
-mostrarCards(data); // Mostrar Data apenas se cargue la página
+main.innerHTML = `<h2 class="no-results">Cargando productos... 🌀</h2>`;
+
+const cargarProductos = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(data);
+    }, 3000); 
+});
+
+
+cargarProductos.then((productosResueltos) => {
+    mostrarCards(productosResueltos);
+});
+// ---- FIN SPRINT 3 ----
+
 
 function filtrarMostrar() {
     const productosFiltrados = data.filter(producto => {
