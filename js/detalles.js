@@ -54,26 +54,33 @@ function addItemToCar(productId, cantidad) {
         return;
     }
 
-    if (parseInt(cantidad) < 1 || cantidad > product.stack) {
+    if (parseInt(cantidad) < 1) {
         Toastify({
-            text: `No hay stock suficiente.`,
+            text: "Debes seleccionar al menos 1 producto.",
+        }).showToast();
+        return;
+    }
+
+    if (cantidad > product.stock) {
+        Toastify({
+            text: "No hay Stock suficiente.",
         }).showToast();
         return;
     }
 
     Swal.fire({
-        title: '¡Alerta!',
+        title: "¡Alerta!",
         text: `¿Estas seguro que quieres añadir ${cantidad} ${product.name} al carrito?`,
         // icon: 'success',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No',
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
         showCancelButton: true,
     }).then(result => {
         if (result.isConfirmed) {
             Toastify({
-                text: `${product.name} Agregado al carrito`,
+                text: `${cantidad} ${product.name} Agregado al carrito`,
             }).showToast()
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
             const index = cart.findIndex(item => item.id === product.id);
 
@@ -89,40 +96,40 @@ function addItemToCar(productId, cantidad) {
             }
 
             // Guardar el carrito actualizado en localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem("cart", JSON.stringify(cart));
 
             // Actualizamos el total de unidades
             const cantidadTotal = cart.reduce((acc, item) => acc + item.quantity, 0);
             localStorage.setItem("quantity", cantidadTotal);
-            
+
             // Actualizamos el stock del producto
-            product.stack -= parseInt(cantidad);
+            product.stock -= parseInt(cantidad);
 
             // Actualizar el contador del carrito en la navbar
-            if (typeof updateCartCounter === 'function') {
+            if (typeof updateCartCounter === "function") {
                 updateCartCounter();
             };
 
             // Resetear la cantidad del input a 0
-            document.getElementById('cantidad').value = 0;
+            document.getElementById("cantidad").value = 0;
 
         } else {
             Toastify({
-                text: `Operación cancelada`,
+                text: "Operación cancelada",
             }).showToast()
         }
     });
 };
 
 
-const cantidad = document.getElementById('cantidad');
+const cantidad = document.getElementById("cantidad");
 
 function incrementarCantidad() {
-    if (cantidad.value < producto.stack) {
+    if (cantidad.value < producto.stock) {
         cantidad.value++;
     } else {
         Toastify({
-            text: `No hay más stock disponible`,
+            text: "No hay más stock disponible",
         }).showToast()
     }
 }
