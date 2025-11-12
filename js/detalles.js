@@ -35,7 +35,7 @@ if (producto) {
                             <input type="number" id="cantidad" value="0">
                             <button onclick="incrementarCantidad()">+</button>
                         </div>
-                        <button onclick="addItemToCar(${producto.id}, document.getElementById('cantidad').value)" class="btn-comprar">Comprar</button>
+                        <button onclick="addItemToCar(${producto.id}, document.getElementById('cantidad').value)" class="btn-comprar">Añadir al carrito</button>
                     </div>
                 ` : '<a href="login.html">Inicia sesión para comprar</a>'}
             </div>
