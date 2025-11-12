@@ -7,6 +7,7 @@
     <title>Carrito — Mi Tienda</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="styles_cart.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -31,20 +32,40 @@
             </div>
         </div>
     </header>
-
     <main class="container">
-        <h1>🛒 Tu Carrito</h1>
-
         <section id="cartArea">
-            <div id="cartContainer"></div>
-
-            <div id="cartFooter">
-                <h2>Total: <span id="total">$0</span></h2>
-                <button id="clearCart">Vaciar carrito</button>
+            <h1>🛒 Tu Carrito</h1>
+    
+            <div class="cart-layout">
+                <!-- Columna de productos -->
+                <div class="cart-products">
+                    <div id="cartContainer"></div>
+                </div>
+    
+                <!-- Columna del resumen -->
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h2>Resumen del pedido</h2>
+                        <div class="summary-item">
+                            <span>Productos en el carrito:</span>
+                            <span id="itemCount">0</span>
+                        </div>
+                        <hr>
+                        <div class="summary-total">
+                            <span>Total a pagar:</span>
+                            <span id="total">$0</span>
+                        </div>
+                        <div class="cart-actions">
+                            <button id="clearCart" class="btn-secondary">Vaciar carrito</button>
+                            <button id="checkoutBtn" class="btn-primary">Proceder al pago</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="./js/navbar.js"></script>
     <script defer src="./js/cart.js"></script>
 </body>
