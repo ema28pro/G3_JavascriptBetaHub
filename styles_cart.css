@@ -33,12 +33,125 @@ nav.main-nav a:hover {
 
 /* ====== Contenedor general del carrito ====== */
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 3rem auto;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
+}
+
+/* ====== Layout de dos columnas ====== */
+.cart-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* ====== Columna de productos ====== */
+.cart-products {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ====== Columna del resumen ====== */
+.cart-summary {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.summary-card {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 1rem 0;
+}
+
+.cart-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+    .cart-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-summary {
+        position: static;
+        order: -1;
+    }
+
+    .container {
+        margin: 1rem;
+        padding: 1rem;
+    }
 }
 
 /* ====== Título ====== */
@@ -59,13 +172,13 @@ nav.main-nav a:hover {
 /* ====== Cada producto en el carrito ====== */
 .cart-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: #fafafa;
     border-radius: 8px;
-    padding: 1rem 1.5rem;
+    padding: 1rem;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
+    margin-bottom: 2%;
 }
 
 .cart-item:hover {
@@ -74,39 +187,46 @@ nav.main-nav a:hover {
 
 /* Imagen del producto */
 .cart-item img {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     border-radius: 8px;
-    object-fit: cover;
-    margin-right: 1rem;
+    object-fit: contain;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
 }
 
-/* Nombre y cantidad */
-.cart-item .details {
+/* Información del producto */
+.cart-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-.cart-item .details h3 {
-    font-size: 1.1rem;
-    margin: 0;
-}
-
-.cart-item .details span {
-    font-size: 0.9rem;
-    color: #555;
-}
-
-/* Botones de cantidad */
-.cart-item .quantity {
-    display: flex;
-    align-items: center;
     gap: 0.5rem;
 }
 
-.cart-item button {
+.cart-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.cart-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Controles del carrito */
+.cart-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.cart-controls button {
     border: none;
     background-color: #ffca28;
     color: #222;
@@ -115,10 +235,21 @@ nav.main-nav a:hover {
     padding: 0.3rem 0.7rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    min-width: 32px;
+    height: 32px;
 }
 
-.cart-item button:hover {
+.cart-controls button:hover {
     background-color: #ffd95e;
+}
+
+.cart-controls .qty {
+    font-weight: bold;
+    padding: 0.3rem 0.5rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    min-width: 40px;
+    text-align: center;
 }
 
 /* ====== Pie del carrito ====== */
