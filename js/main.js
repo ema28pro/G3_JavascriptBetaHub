@@ -21,7 +21,7 @@ const cargarProductos = new Promise((resolve, reject) => {
 });
 
 
-cargarProductos.then((productosResueltos) => {
+cargarProductos.then(productosResueltos => {
     mostrarCards(productosResueltos);
 });
 // ---- FIN SPRINT 3 ----
