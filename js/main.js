@@ -19,6 +19,7 @@ function checkUrlMessages() {
         }).showToast();
     } else if (auth === 'correct') {
         Toastify({
+            backgroundColor: "#28a745",
             text: "Sesión iniciada correctamente",
             gravity: "top",
             offset: {

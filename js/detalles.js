@@ -90,6 +90,7 @@ function addItemToCar(productId, cantidad) {
     }).then(result => {
         if (result.isConfirmed) {
             Toastify({
+                backgroundColor: "#28a745",
                 text: `${cantidad} ${product.name} agregado al carrito`,
                 offset: {
                     y: 95 // Posición debajo del header-top
