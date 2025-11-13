@@ -58,7 +58,17 @@ listaCategoria.innerHTML = categoriasCheckboxes;
 let categoriasSeleccionadas = ["Todos"];
 let terminoBusqueda = "";
 
-main.innerHTML = `<h2 class="no-results">Cargando productos... 🌀</h2>`;
+const loadingSwal = Swal.fire({
+    title: 'Cargando productos...',
+    text: 'Por favor espera',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showConfirmButton: false,
+    willOpen: () => {
+        Swal.showLoading();
+    }
+});
+main.innerHTML = `<h2 class="no-results">Cargando productos 🌀</h2>`;
 
 const cargarProductos = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -68,6 +78,7 @@ const cargarProductos = new Promise((resolve, reject) => {
 
 
 cargarProductos.then(productosResueltos => {
+    loadingSwal.close(); // Cerrar el SweetAlert de carga
     mostrarCards(productosResueltos);
 });
 // ---- FIN SPRINT 3 ----
