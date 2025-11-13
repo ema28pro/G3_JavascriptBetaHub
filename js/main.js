@@ -11,14 +11,22 @@ function checkUrlMessages() {
             // position: "center",
             offset: {
                 y: 80 // Posición debajo del header-top
-            },
+            }
             // style: {
             //     borderRadius: "8px",
             //     fontWeight: "500"
             // }
         }).showToast();
-        window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (auth === 'correct') {
+        Toastify({
+            text: "Sesión iniciada correctamente",
+            gravity: "top",
+            offset: {
+                y: 80 // Posición debajo del header-top
+            }
+        }).showToast();
     }
+    window.history.replaceState({}, document.title, window.location.pathname);
 }
 
 // Ejecutar verificación al cargar la página
