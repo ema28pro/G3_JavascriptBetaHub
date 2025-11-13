@@ -1,3 +1,29 @@
+// VERIFICAR MENSAJES DE REDIRECCIÓN EN LA URL
+function checkUrlMessages() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const auth = urlParams.get('auth');
+
+    if (auth === 'required') {
+        Toastify({
+            text: "Debes iniciar sesión para acceder al carrito",
+            backgroundColor: "#ff4757",
+            gravity: "top",
+            // position: "center",
+            offset: {
+                y: 80 // Posición debajo del header-top
+            },
+            // style: {
+            //     borderRadius: "8px",
+            //     fontWeight: "500"
+            // }
+        }).showToast();
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+}
+
+// Ejecutar verificación al cargar la página
+checkUrlMessages();
+
 const main = document.querySelector("main");
 const buscador = document.getElementById("buscador");
 const listaCategoria = document.getElementById("category");
@@ -17,7 +43,7 @@ main.innerHTML = `<h2 class="no-results">Cargando productos... 🌀</h2>`;
 const cargarProductos = new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve(data);
-    }, 3000); 
+    }, 3000);
 });
 
 

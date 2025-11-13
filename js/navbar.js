@@ -32,7 +32,7 @@ renderAuth();
 updateCartCounter();
 
 // Lista de páginas (puedes agregar más aquí)
-const titulos = ["Inicio"];
+const titulos = ["Inicio", "Contacto"];
 let menu = [];
 
 for (let titulo of titulos) {

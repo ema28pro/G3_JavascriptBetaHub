@@ -11,7 +11,8 @@ body {
 header {
     background: linear-gradient(135deg, #909cab, #378cf4);
     color: rgb(20, 19, 85);
-    padding: 20px 40px;
+    padding: 0px 40px;
+    padding-bottom: 20px;
     margin-bottom: 0px;
     box-shadow: 0 4px 12px rgba(6, 8, 15, 0.149);
     display: flex;
@@ -21,6 +22,10 @@ header {
 }
 
 .header-top {
+    background: linear-gradient(135deg, #c9d6ff, #7fb8ff);
+    border-radius: 0 0 20px 20px;
+    padding: 12px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -63,6 +68,7 @@ nav ul li a:hover {
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;
+    /* background-color: rgba(120, 190, 190, 0.692); */
     transition: all 0.3s ease;
 }
 
@@ -97,7 +103,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.25);
     padding: 8px 16px;
     border-radius: 25px;
 }
@@ -261,7 +267,7 @@ section {
     color: white;
     text-decoration: none;
     padding: 10px;
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
     font-weight: 500;
     transition: background-color 0.3s ease;
 }

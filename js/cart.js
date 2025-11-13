@@ -1,3 +1,16 @@
+// VERIFICAR SESIÓN ACTIVA
+function checkActiveSession() {
+    const userEmail = localStorage.getItem("email");
+    if (!userEmail) {
+        // Redirigir inmediatamente a la home con código simple
+        window.location.href = "./index.html?auth=required";
+        return false;
+    }
+    return true;
+}
+
+checkActiveSession()
+
 // CARGA inicial del carrito (array de objetos) desde localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 

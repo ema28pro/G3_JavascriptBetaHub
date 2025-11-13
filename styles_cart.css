@@ -13,7 +13,6 @@ header,
 nav.main-nav {
     background-color: #000000;
     color: #000000;
-    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -47,6 +46,7 @@ nav.main-nav a:hover {
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
     margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* ====== Columna de productos ====== */
@@ -54,6 +54,15 @@ nav.main-nav a:hover {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+/* ====== Mensaje de carrito vacío ====== */
+#cartContainer p {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    /* margin: 3rem 0; */
+    font-weight: 500;
 }
 
 /* ====== Columna del resumen ====== */
