@@ -14,7 +14,14 @@ form.addEventListener("submit", (event) => {
     } else {
         emailUser.value = "";
         passwordUser.value = "";
-        alert("Credenciales incorrectas. Por favor, intenta de nuevo.");
+        Toastify({
+            text: "Credenciales incorrectas. Por favor, intenta de nuevo.",
+            backgroundColor: "#ff4757",
+            gravity: "top",
+            offset: {
+                y: 95 // Posición debajo del header-top
+            },
+        }).showToast()
     }
 });
 
