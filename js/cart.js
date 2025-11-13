@@ -19,6 +19,7 @@ function saveCart() {
     const totalQty = cart.reduce((s, p) => s + p.quantity, 0);
     localStorage.setItem('quantity', totalQty);
     updateCartCounter()
+    renderCart();
 }
 
 // RENDER
@@ -27,10 +28,10 @@ function renderCart() {
     const totalEl = document.querySelector('#total');
     const itemCountEl = document.querySelector('#itemCount');
 
-    // if (!container || !totalEl || !itemCountEl) {
-    //     console.error("Faltan elementos en el HTML");
-    //     return;
-    // }
+    if (!container || !totalEl || !itemCountEl) {
+        console.error("Faltan elementos en el HTML");
+        return;
+    }
 
     if (!cart || cart.length === 0) {
         container.innerHTML = '<p>El carrito está vacío 💤</p>';
@@ -52,19 +53,19 @@ function renderCart() {
         const card = document.createElement('article');
         card.className = 'cart-item';
         card.innerHTML = `
-    <img src="${image}" alt="${name}" width="100" />
-    <div class="cart-info">
-        <h3>${name}</h3>
-        <p>Precio unitario: ${price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
-        <p>Total: ${(price * quantity).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
-        <div class="cart-controls">
-            <button onclick="decreaseItem(${idx})">-</button>
-            <span class="qty">${quantity}</span>
-            <button onclick="increaseItem(${idx})">+</button>
-            <button onclick="removeItem(${idx})">Eliminar</button>
-        </div>
-        </div>
-    `;
+        <img src="${image}" alt="${name}" width="100" />
+        <div class="cart-info">
+            <h3>${name}</h3>
+            <p>Precio unitario: ${price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
+            <p>Total: ${(price * quantity).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
+            <div class="cart-controls">
+                <button onclick="decreaseItem(${idx})">-</button>
+                <span class="qty">${quantity}</span>
+                <button onclick="increaseItem(${idx})">+</button>
+                <button onclick="removeItem(${idx})">Eliminar</button>
+            </div>
+            </div>
+        `;
         container.appendChild(card);
     });
 
@@ -87,7 +88,6 @@ function increaseItem(index) {
     if (item.quantity < item.stock) {
         item.quantity = Number(item.quantity) + 1;
         saveCart();
-        renderCart();
     } else {
         Toastify({
             backgroundColor: "#ff4757",
@@ -105,7 +105,6 @@ function decreaseItem(index) {
     if (item.quantity > 1) {
         item.quantity = Number(item.quantity) - 1;
         saveCart();
-        renderCart();
     } else {
         removeItem(index);
     }
@@ -126,10 +125,9 @@ function removeItem(index) {
         if (result.isConfirmed) {
             cart.splice(index, 1);
             saveCart();
-            renderCart();
 
             Toastify({
-                backgroundColor: "#47ff6fff",
+                backgroundColor: "#28a745",
                 text: `${item.name} eliminado del carrito correctamente`,
                 offset: {
                     y: 95 // Posición debajo del header-top
@@ -158,7 +156,7 @@ function clearCart() {
         }).showToast();
         return;
     }
-    
+
     Swal.fire({
         title: "¡Alerta!",
         text: "¿Estás seguro que quieres vaciar todo el carrito?",
@@ -169,10 +167,9 @@ function clearCart() {
         if (result.isConfirmed) {
             cart = [];
             saveCart();
-            renderCart();
 
             Toastify({
-                backgroundColor: "#47ff6fff",
+                backgroundColor: "#28a745",
                 text: "Carrito vaciado completamente",
                 offset: {
                     y: 95 // Posición debajo del header-top
@@ -210,7 +207,7 @@ function checkout() {
         title: "¡Confirmar compra!",
         html: `
             <div style="text-align: left;">
-                <p><strong>Productos:</strong> ${totalItems} artículos</p>
+                <p><strong>Productos:</strong> ${totalItems} ${totalItems > 1 ? 'artículos' : 'artículo'}</p>
                 <p><strong>Total a pagar:</strong> ${total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
             </div>
         `,
@@ -219,17 +216,71 @@ function checkout() {
         showCancelButton: true,
     }).then(result => {
         if (result.isConfirmed) {
-            // Simular compra exitosa
-            cart = [];
-            saveCart();
-            renderCart();
-
-            Toastify({
-                text: "¡Compra realizada exitosamente! 🎉",
-                offset: {
-                    y: 95 // Posición debajo del header-top
+            Swal.fire({
+                title: 'Procesando compra...',
+                text: 'Por favor espera',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
                 }
-            }).showToast();
+            });
+
+            // Preparar datos para enviar a la API
+            const userEmail = localStorage.getItem("email");
+            const orderData = {
+                email: userEmail,
+                cantidad: totalItems,
+                total: total,
+                items: cart,
+            };
+
+            // Enviar datos a MockAPI
+            fetch('https://6915119d84e8bd126af8878b.mockapi.io/API/HogarYMercado/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                } else return response.json();
+            }).then(data => {
+                // Compra exitosa
+                cart = []; // Limpiar carrito
+                saveCart();
+
+                // Mostrar éxito con email y número de orden
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Compra realizada exitosamente!',
+                    html: `
+                    <div style="text-align: left;">
+                        <p><strong>Email:</strong> ${userEmail}</p>
+                        <p><strong>Número de orden:</strong> #${data.id}</p>
+                        <p><strong>Total pagado:</strong> ${total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
+                    </div>
+                `,
+                    confirmButtonText: 'Continuar'
+                });
+            }).catch(error => {
+                // Error en la compra
+                console.error('Error al procesar la compra:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al procesar la compra',
+                    html: `
+                    <div style="text-align: center;">
+                        <p>Hubo un problema al procesar tu pedido.</p>
+                        <p><small>Error: ${error.message}</small></p>
+                        <p>Por favor intenta nuevamente.</p>
+                    </div>
+                `,
+                    confirmButtonText: 'Entendido'
+                });
+            });
         } else {
             Toastify({
                 backgroundColor: "#ff4757",
