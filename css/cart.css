@@ -33,11 +33,12 @@ nav.main-nav a:hover {
 /* ====== Contenedor general del carrito ====== */
 .container {
     max-width: 1200px;
-    margin: 3rem auto;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
+    /* margin: 3rem auto; */
+    margin: 4rem;
 }
 
 /* ====== Layout de dos columnas ====== */
