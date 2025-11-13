@@ -49,21 +49,33 @@ function addItemToCar(productId, cantidad) {
 
     if (!product) {
         Toastify({
+            backgroundColor: "#ff4757",
             text: "Producto no encontrado",
+            offset: {
+                y: 95 // Posición debajo del header-top
+            }
         }).showToast();
         return;
     }
 
     if (parseInt(cantidad) < 1) {
         Toastify({
+            backgroundColor: "#ff4757",
             text: "Debes seleccionar al menos 1 producto.",
+            offset: {
+                y: 95 // Posición debajo del header-top
+            }
         }).showToast();
         return;
     }
 
     if (cantidad > product.stock) {
         Toastify({
+            backgroundColor: "#ff4757",
             text: "No hay Stock suficiente.",
+            offset: {
+                y: 95 // Posición debajo del header-top
+            }
         }).showToast();
         return;
     }
@@ -78,7 +90,10 @@ function addItemToCar(productId, cantidad) {
     }).then(result => {
         if (result.isConfirmed) {
             Toastify({
-                text: `${cantidad} ${product.name} Agregado al carrito`,
+                text: `${cantidad} ${product.name} agregado al carrito`,
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast()
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -115,7 +130,11 @@ function addItemToCar(productId, cantidad) {
 
         } else {
             Toastify({
+                backgroundColor: "#ff4757",
                 text: "Operación cancelada",
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast()
         }
     });
@@ -129,7 +148,11 @@ function incrementarCantidad() {
         cantidad.value++;
     } else {
         Toastify({
+            backgroundColor: "#ff4757",
             text: "No hay más stock disponible",
+            offset: {
+                y: 95 // Posición debajo del header-top
+            }
         }).showToast()
     }
 }

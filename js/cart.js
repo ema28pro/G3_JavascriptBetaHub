@@ -17,7 +17,7 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
     const totalQty = cart.reduce((s, p) => s + p.quantity, 0);
-    localStorage.setItem('quantity', String(totalQty));
+    localStorage.setItem('quantity', totalQty);
     updateCartCounter()
 }
 
@@ -90,7 +90,11 @@ function increaseItem(index) {
         renderCart();
     } else {
         Toastify({
+            backgroundColor: "#ff4757",
             text: `No hay más stock disponible`,
+            offset: {
+                y: 95 // Posición debajo del header-top
+            }
         }).showToast();
     }
 }
@@ -125,17 +129,36 @@ function removeItem(index) {
             renderCart();
 
             Toastify({
-                text: `${item.name} Eliminado del carrito`,
+                backgroundColor: "#47ff6fff",
+                text: `${item.name} eliminado del carrito correctamente`,
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast();
         } else {
             Toastify({
+                backgroundColor: "#ff4757",
                 text: "Operación cancelada",
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast();
         }
     });
 }
 
 function clearCart() {
+    if (!cart || cart.length === 0) {
+        Toastify({
+            backgroundColor: "#ff4757",
+            text: "El carrito está vacío",
+            offset: {
+                y: 95 // Posición debajo del header-top
+            }
+        }).showToast();
+        return;
+    }
+    
     Swal.fire({
         title: "¡Alerta!",
         text: "¿Estás seguro que quieres vaciar todo el carrito?",
@@ -149,11 +172,19 @@ function clearCart() {
             renderCart();
 
             Toastify({
+                backgroundColor: "#47ff6fff",
                 text: "Carrito vaciado completamente",
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast();
         } else {
             Toastify({
+                backgroundColor: "#ff4757",
                 text: "Operación cancelada",
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast();
         }
     });
@@ -163,7 +194,11 @@ function clearCart() {
 function checkout() {
     if (!cart || cart.length === 0) {
         Toastify({
+            backgroundColor: "#ff4757",
             text: "El carrito está vacío",
+            offset: {
+                y: 95 // Posición debajo del header-top
+            }
         }).showToast();
         return;
     }
@@ -191,10 +226,17 @@ function checkout() {
 
             Toastify({
                 text: "¡Compra realizada exitosamente! 🎉",
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast();
         } else {
             Toastify({
+                backgroundColor: "#ff4757",
                 text: "Compra cancelada",
+                offset: {
+                    y: 95 // Posición debajo del header-top
+                }
             }).showToast();
         }
     });
