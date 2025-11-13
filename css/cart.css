@@ -147,23 +147,6 @@ hr {
     background-color: #545b62;
 }
 
-/* ====== Responsive ====== */
-@media (max-width: 768px) {
-    .cart-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .cart-summary {
-        position: static;
-        order: -1;
-    }
-
-    .container {
-        margin: 1rem;
-        padding: 1rem;
-    }
-}
-
 /* ====== Título ====== */
 .container h1 {
     text-align: center;
