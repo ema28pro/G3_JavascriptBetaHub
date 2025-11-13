@@ -1,4 +1,4 @@
-const categorylist = ["Todos", "Electrodomesticos", "Herramientas", "Cocina", "Limpieza", "Hogar", "Dia a dia"]
+const categorylist = ["Electrodomesticos", "Herramientas", "Cocina", "Limpieza", "Hogar", "Dia a dia"]
 
 const data = [
     {

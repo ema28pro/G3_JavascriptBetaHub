@@ -29,13 +29,24 @@ const buscador = document.getElementById("buscador");
 const listaCategoria = document.getElementById("category");
 const barraBusqueda = document.querySelector(".search-container");
 
-const categoriasBtn = categorylist.map(categoria =>
-    `<li><button class="category-btn" onclick="seleccionarCategoria('${categoria}')">${categoria}</button></li>`
-);
+// Crear el elemento "Todos" primero
+let categoriasCheckboxes = `<li>
+    <input type="checkbox" id="categoria-todos" value="Todos" checked onchange="manejarSeleccionTodos(this)">
+    <label for="categoria-todos" class="checkbox-btn">Todos</label>
+</li>`;
 
-listaCategoria.innerHTML = categoriasBtn.join("");
+// Concatenar el resto de categorías
+categoriasCheckboxes += categorylist
+    .map((categoria, id) => {
+        return `<li>
+            <input type="checkbox" id="categoria-${id}" value="${categoria}" onchange="manejarSeleccionCategoria()">
+            <label for="categoria-${id}" class="checkbox-btn">${categoria}</label>
+        </li>`;
+    }).join("");
 
-let categoriaSeleccionada = "Todos";
+listaCategoria.innerHTML = categoriasCheckboxes;
+
+let categoriasSeleccionadas = ["Todos"];
 let terminoBusqueda = "";
 
 main.innerHTML = `<h2 class="no-results">Cargando productos... 🌀</h2>`;
@@ -55,8 +66,12 @@ cargarProductos.then(productosResueltos => {
 
 function filtrarMostrar() {
     const productosFiltrados = data.filter(producto => {
-        const cumpleCategoria = categoriaSeleccionada === "Todos" ||
-            producto.category.includes(categoriaSeleccionada);
+        // Si no hay categorías seleccionadas o "Todos" está seleccionado, mostrar todos
+        const cumpleCategoria = categoriasSeleccionadas.length === 0 ||
+            categoriasSeleccionadas.includes("Todos") ||
+            categoriasSeleccionadas.some(categoria =>
+                producto.category.includes(categoria)
+            );
 
         const cumpleBusqueda = terminoBusqueda === "" ||
             producto.name.toLowerCase().includes(terminoBusqueda) ||
@@ -72,9 +87,36 @@ function filtrarMostrar() {
     mostrarCards(productosFiltrados);
 }
 
-function seleccionarCategoria(categoria) {
-    categoriaSeleccionada = categoria
-    filtrarMostrar()
+function manejarSeleccionTodos(checkbox) {
+    if (checkbox.checked) {
+        // Si se selecciona "Todos", deseleccionar todas las demás categorías
+        categoriasSeleccionadas = ["Todos"];
+        const otrosCheckboxes = document.querySelectorAll('#category input[type="checkbox"]:not([value="Todos"])');
+        otrosCheckboxes.forEach(cb => cb.checked = false);
+    } else {
+        // Si se deselecciona "Todos", removerlo de la lista
+        categoriasSeleccionadas = categoriasSeleccionadas.filter(cat => cat !== "Todos");
+    }
+    filtrarMostrar();
+}
+
+function manejarSeleccionCategoria() {
+    // Obtener todos los checkboxes marcados (excepto "Todos")
+    const checkboxesMarcados = document.querySelectorAll('#category input[type="checkbox"]:checked:not([value="Todos"])');
+    const checkboxTodos = document.querySelector('#category input[type="checkbox"][value="Todos"]');
+
+    if (checkboxesMarcados.length > 0) {
+        // Si hay categorías específicas seleccionadas, deseleccionar "Todos"
+        if (checkboxTodos.checked) {
+            checkboxTodos.checked = false;
+        }
+        categoriasSeleccionadas = Array.from(checkboxesMarcados).map(cb => cb.value);
+    } else {
+        // Si no hay categorías específicas seleccionadas, las categorías seleccionadas quedan vacías
+        categoriasSeleccionadas = [];
+    }
+
+    filtrarMostrar();
 }
 
 function realizarBusqueda() {
