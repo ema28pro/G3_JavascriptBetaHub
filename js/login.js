@@ -23,7 +23,7 @@ form.addEventListener("submit", (event) => {
         localStorage.setItem("email", emailUser.value);
         localStorage.setItem("cart", JSON.stringify([]));
         localStorage.setItem("quantity", 0);
-        window.location.href = "./index.html?auth=correct";
+        window.location.href = "./index.html?alert=auth_correct";
     } else {
         emailUser.value = "";
         passwordUser.value = "";

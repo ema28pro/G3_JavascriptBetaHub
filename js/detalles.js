@@ -1,19 +1,17 @@
+const main = document.getElementById("detalle-producto");
+
 // 1. Obtener el ID del producto desde la URL
 const params = new URLSearchParams(window.location.search);
 const idProducto = parseInt(params.get("prod"));
 
-if (idProducto >25 || idProducto <1) {
-    window.location.href = "./index.html";
+if (idProducto > 25 || idProducto < 1 || isNaN(idProducto)) {
+    window.location.href = "./index.html?alert=invalid_product";
 }
 
 // 2. Buscar el producto en el array
 const producto = data.find(p => p.id === idProducto);
 
-// if producto // Si no se encontro
-
 // 3. Mostrar los detalles en el HTML
-const main = document.getElementById("detalle-producto");
-
 if (producto) {
     // Verificar si hay sesión iniciada
     const sesionIniciada = localStorage.getItem("email");
@@ -43,6 +41,8 @@ if (producto) {
             </div>
         </div>
     </div>`;
+} else {
+    main.innerHTML = `<h2 class="no-results">❌ No se ah encontrado el producto</h2>`;
 }
 
 function addItemToCar(productId, cantidad) {

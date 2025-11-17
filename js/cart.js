@@ -3,7 +3,7 @@ function checkActiveSession() {
     const userEmail = localStorage.getItem("email");
     if (!userEmail) {
         // Redirigir inmediatamente a la home con código simple
-        window.location.href = "./index.html?auth=required";
+        window.location.href = "./index.html?alert=auth_required";
         return false;
     }
     return true;
