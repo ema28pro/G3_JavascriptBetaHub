@@ -2,7 +2,9 @@
 const params = new URLSearchParams(window.location.search);
 const idProducto = parseInt(params.get("prod"));
 
-// if idproduct no in [1, ... 25]
+if (idProducto >25 || idProducto <1) {
+    window.location.href = "./index.html";
+}
 
 // 2. Buscar el producto en el array
 const producto = data.find(p => p.id === idProducto);
