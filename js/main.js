@@ -1,33 +1,39 @@
 // VERIFICAR MENSAJES DE REDIRECCIÓN EN LA URL
 function checkUrlMessages() {
     const urlParams = new URLSearchParams(window.location.search);
-    const auth = urlParams.get('auth');
-
-    if (auth === 'required') {
-        Toastify({
+    const alert = urlParams.get('alert');
+    const alertMessages = {
+        'auth_required': {
             text: "Debes iniciar sesión para acceder al carrito",
-            backgroundColor: "#ff4757",
-            gravity: "top",
-            // position: "center",
-            offset: {
-                y: 80 // Posición debajo del header-top
-            }
-            // style: {
-            //     borderRadius: "8px",
-            //     fontWeight: "500"
-            // }
-        }).showToast();
-    } else if (auth === 'correct') {
-        Toastify({
-            backgroundColor: "#28a745",
+            backgroundColor: "#ff4757"
+        },
+        'auth_correct': {
             text: "Sesión iniciada correctamente",
+            backgroundColor: "#28a745"
+        },
+        'invalid_product': {
+            text: "Indice de producto inválido",
+            backgroundColor: "#ff4757"
+        }
+    };
+
+    // Verificar si existe el mensaje, si no usar default de error
+    if (alert) {
+        const messageConfig = alertMessages[alert] || {
+            text: "Error desconocido",
+            backgroundColor: "#ff4757"
+        };
+
+        Toastify({
+            text: messageConfig.text,
+            backgroundColor: messageConfig.backgroundColor,
             gravity: "top",
             offset: {
                 y: 80 // Posición debajo del header-top
             }
         }).showToast();
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
-    window.history.replaceState({}, document.title, window.location.pathname);
 }
 
 // Ejecutar verificación al cargar la página
@@ -70,7 +76,7 @@ const loadingSwal = Swal.fire({
 });
 main.innerHTML = `<h2 class="no-results">Cargando productos 🌀</h2>`;
 
-const cargarProductos = new Promise((resolve, reject) => {
+const cargarProductos = new Promise((resolve) => {
     setTimeout(() => {
         resolve(data);
     }, 3000);
