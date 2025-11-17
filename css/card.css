@@ -3,7 +3,7 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(266px, 1fr));
     row-gap: 25px;
-    column-gap: 5%;
+    column-gap: 100px;
     padding: 30px;
     justify-items: center;
     margin-top: 20px;
