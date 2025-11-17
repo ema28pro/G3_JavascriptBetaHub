@@ -9,11 +9,15 @@ const categorylist = ["Electrodomesticos", "Herramientas", "Cocina", "Limpieza",
 //     }
 // }).then(response => {
 //     if (response.ok) {
-//         data = response.json();
+//         return response.json();
 //     } else {
 //         throw new Error(`HTTP error! status: ${response.status}`);
 //     }
-// }).catch(error => {
+// }).then(
+//     productos => {
+//         data = productos;
+//     }
+// ).catch(error => {
 //     console.error('Error al obtener productos:', error);
 // });
 
