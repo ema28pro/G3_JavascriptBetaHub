@@ -52,7 +52,7 @@ if (producto) {
         </div>
     </div>`;
 } else {
-    main.innerHTML = `<h2 class="no-results">❌ No se ah encontrado el producto</h2>`;
+    main.innerHTML = `<h2 class="no-results">No se ah encontrado el producto</h2>`;
 }
 
 function addItemToCar(productId, cantidad) {

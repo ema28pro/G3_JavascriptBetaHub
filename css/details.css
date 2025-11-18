@@ -233,3 +233,10 @@
         align-self: center;
     }
 }
+
+.no-results {
+    color: white;
+    text-align: center;
+    width: 100%;
+    grid-column: 1 / -1;
+}
