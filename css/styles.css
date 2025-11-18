@@ -70,16 +70,19 @@ nav ul li a:hover {
     border-radius: 50%;
     /* background-color: rgba(120, 190, 190, 0.692); */
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .cart-container:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.cart-icon {
+.cart-container .material-symbols-outlined {
     color: rgb(20, 19, 85);
-    width: 28px;
-    height: 28px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cart-count {

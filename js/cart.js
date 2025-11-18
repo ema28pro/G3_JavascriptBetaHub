@@ -34,7 +34,7 @@ function renderCart() {
     }
 
     if (!cart || cart.length === 0) {
-        container.innerHTML = '<p>El carrito está vacío 💤</p>';
+        container.innerHTML = '<p>El carrito está vacío</p>';
         totalEl.textContent = (0).toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
         itemCountEl.textContent = '0';
         return;
@@ -59,9 +59,13 @@ function renderCart() {
             <p>Precio unitario: ${price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
             <p>Total: ${(price * quantity).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
             <div class="cart-controls">
-                <button onclick="decreaseItem(${idx})">-</button>
+                <button onclick="decreaseItem(${idx})">
+                    <span class="material-symbols-outlined">remove</span>
+                </button>
                 <span class="qty">${quantity}</span>
-                <button onclick="increaseItem(${idx})">+</button>
+                <button onclick="increaseItem(${idx})">
+                    <span class="material-symbols-outlined">add</span>
+                </button>
                 <button onclick="removeItem(${idx})">Eliminar</button>
             </div>
             </div>

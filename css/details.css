@@ -77,7 +77,9 @@
 .detalle-card a {
     margin-top: 10px;
     height: 15px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     background-color: #004aad;
     color: white;
     text-decoration: none;
@@ -86,6 +88,10 @@
     font-weight: 600;
     transition: background-color 0.3s ease;
     align-self: flex-start;
+}
+
+.detalle-card a .material-symbols-outlined {
+    font-size: 18px;
 }
 
 /* --- Estilos para contador y botón de comprar --- */
@@ -115,6 +121,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.contador-container button .material-symbols-outlined {
+    color: white;
+    font-size: 18px;
 }
 
 .contador-container button:hover {
@@ -156,7 +167,9 @@
 }
 
 .btn-comprar {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background-color: #28a745;
     color: white;
     border: none;
@@ -169,6 +182,13 @@
     box-shadow: 0 3px 8px rgba(40, 167, 69, 0.3);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    /* flex-direction: row-reverse; */
+}
+
+.btn-comprar .material-symbols-outlined {
+    font-size: 20px;
+    /* color: white; */
+    /* order: -1; */
 }
 
 .btn-comprar:hover {

@@ -21,7 +21,10 @@ if (producto) {
         <div class="detalle-content">
             <div class="detalle-imagen">
                 <img src="${producto.url}" alt="${producto.name}">
-                <a href="index.html">← Volver al catálogo</a>
+                <a href="index.html">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    Volver al catálogo
+                </a>
             </div>
             <div class="detalle-info">
                 <h2>${producto.name}</h2>
@@ -31,11 +34,18 @@ if (producto) {
                 ${sesionIniciada ? `
                     <div class="compra-section">
                         <div class="contador-container">
-                            <button onclick="decrementarCantidad()">-</button>
+                            <button onclick="decrementarCantidad()">
+                                <span class="material-symbols-outlined">remove</span>
+                            </button>
                             <input type="number" id="cantidad" value="0">
-                            <button onclick="incrementarCantidad()">+</button>
+                            <button onclick="incrementarCantidad()">
+                                <span class="material-symbols-outlined">add</span>
+                            </button>
                         </div>
-                        <button onclick="addItemToCar(${producto.id}, document.getElementById('cantidad').value)" class="btn-comprar">Añadir al carrito</button>
+                        <button onclick="addItemToCar(${producto.id}, document.getElementById('cantidad').value)" class="btn-comprar">
+                            <span class="material-symbols-outlined">add_shopping_cart</span>
+                            Añadir al carrito
+                        </button>
                     </div>
                 ` : '<a href="login.html">Inicia sesión para comprar</a>'}
             </div>
@@ -85,7 +95,6 @@ function addItemToCar(productId, cantidad) {
     Swal.fire({
         title: "¡Alerta!",
         text: `¿Estas seguro que quieres añadir ${cantidad} ${product.name} al carrito?`,
-        // icon: 'success',
         confirmButtonText: "Si",
         cancelButtonText: "No",
         showCancelButton: true,
