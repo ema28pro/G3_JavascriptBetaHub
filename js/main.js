@@ -74,6 +74,7 @@ const loadingSwal = Swal.fire({
         Swal.showLoading();
     }
 });
+
 main.innerHTML = `<h2 class="no-results">Cargando productos 🌀</h2>`;
 
 const cargarProductos = new Promise((resolve) => {
