@@ -195,7 +195,7 @@ function crearBoton(id, texto, handler) {
 }
 
 function mostrarBoton() {
-    crearBoton("btn-limpiar", "Limpiar", limpiarBuscador);
+    crearBoton("btn-limpiar", '<span class="material-symbols-outlined">close</span>', limpiarBuscador);
     // crearBoton("btn-buscar", "Buscar", realizarBusqueda);
 }
 

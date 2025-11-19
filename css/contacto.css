@@ -167,7 +167,7 @@
 
 .team-card:nth-child(7) {
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-    
+
 }
 
 .team-card:nth-child(8) {
@@ -296,7 +296,7 @@
 /* Título personalizado para la página */
 #catalog-title {
     text-align: center;
-    color: #333;
+    color: rgb(20, 19, 85);
     font-size: 2.5rem;
     margin: 2rem 0;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
