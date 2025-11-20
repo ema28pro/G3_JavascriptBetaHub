@@ -76,5 +76,10 @@ G3_JavascriptBetaHub/
 *   En detalles iniciar contador en 1 y que muestre el precio con la cantidad seleccionada.
 *   Mejorar estilos y la UI/UX con animaciones y transiciones.
 
+## 📚 Recursos Adicionales
+
+*   **Rama `diapositivas`:** En esta rama puedes encontrar las diapositivas utilizadas durante las clases.
+*   **Rama `ejercicios`:** En esta rama se encuentran algunos ejercicios realizados clase a clase.
+
 ---
 *Desarrollado por el Equipo 3 del Curso de Javascript Intermedio de Guayerd Ofertado por BetaHub*
