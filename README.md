@@ -72,6 +72,7 @@ G3_JavascriptBetaHub/
 *   Pagina de pedidos para usuarios registrados.
 *   Registro de usuario y pagina de usuario.
 *   Mostrar Botones del carrito solo si esta lleno.
+*   Mostrar Categorias del producto en detalles.
 *   En detalles iniciar contador en 1 y que muestre el precio con la cantidad seleccionada.
 *   Mejorar estilos y la UI/UX con animaciones y transiciones.
 
